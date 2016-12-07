@@ -34,23 +34,25 @@ def process_reads(reads, data, suffix_array, mismatches_allowed, min_mismatches_
     table = {}
     longest_prefix = ''
     longest_prefix_start = None
+    accepted_alignments = 0
     for read_seq in reads:
         idx = binary_search(data, read_seq, suffix_array)
         prefix, mismatches = compare_read(data, idx, read_seq, mismatches_allowed)
 
         # check to see if there was an acceptable number of mismatches
         if mismatches:
+            accepted_alignments += 1
             start, length = prefix
             if length > len(longest_prefix):
                 longest_prefix = data[start:start+length]
                 longest_prefix_start = start
             for mismatch in mismatches:
-                mismatch_index, mismatch_nucleotide = mismatch
                 if mismatch not in table:
                     table[mismatch] = 0
                 table[mismatch] += 1
 
 
+    print('Number of accepted alignments: %d' % accepted_alignments)
     print('Longest prefix: ' + longest_prefix)
     print('Start: ' + str(longest_prefix_start))
 
@@ -63,6 +65,8 @@ def process_reads(reads, data, suffix_array, mismatches_allowed, min_mismatches_
         sum_mismatches += count
 
     print("Total number of mismatches: %d" % sum_mismatches)
+
+    return table
 
 def compare_read(data, read_idx, read_seq, max_mismatches):
     mismatches = []
@@ -91,10 +95,23 @@ if __name__ == '__main__':
     suffix_array.sort(key=lambda x: data[x:x + READ_SEQUENCE_LENGTH])
 
     print("Visit 1 of the HIV genome")
-    process_reads(v1, data, suffix_array, MAX_MISMATCHES_ALLOWED, 5)
+    v1_table = process_reads(v1, data, suffix_array, MAX_MISMATCHES_ALLOWED, 5)
     print()
     print("Visit 6 of the HIV genome")
-    process_reads(v6, data, suffix_array, MAX_MISMATCHES_ALLOWED, 5)
+    v6_table = process_reads(v6, data, suffix_array, MAX_MISMATCHES_ALLOWED, 5)
+    print()
 
+    v1_read_positions = set([a[0] for a in v1_table])
+    v6_read_positions = set([a[0] for a in v6_table])
+
+    v1_and_v6 = v1_read_positions & v6_read_positions
+    in_v1_not_v6 = v1_read_positions - v6_read_positions
+    print("Read positions in both v1 and v6 (%d)" % len(v1_and_v6))
+    for pos in v1_and_v6:
+        print('\t%d' % pos)
+
+    print("Read positions in v1 and not in v6 (%d)" % len(in_v1_not_v6))
+    for pos in in_v1_not_v6:
+        print('\t%d' % pos)
 
 

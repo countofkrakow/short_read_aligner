@@ -1,0 +1,39 @@
+Christopher Nakovski
+
+1. Yes. There are more accepted read alignments in visit 6 than visit 1. This means that from the accepted alignments, there are
+
+2. No, there are some variants in v1 that are missing in v6:
+    read positions:
+        1806
+        1168
+        1817
+        1818
+        1819
+        1787
+        1440
+        1825
+        928
+        1443
+        1828
+        1191
+        1448
+        1449
+        1576
+        943
+        1474
+        1609
+        1483
+        1612
+        1613
+        1616
+        1618
+        991
+        1762
+        1764
+        1255
+        1770
+        1011
+        1015
+        1403
+
+3. Yes, the vast majority, if not all were found in the gag region.
