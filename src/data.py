@@ -12,4 +12,16 @@ def parse_fasta(fname):
 
 def parse_fastq(fname):
     ret = []
-    f = open(fname, 'r')
+    with open(fname, 'r') as f:
+        read_id = f.readline()
+        while read_id:
+            read_sequence = f.readline()
+            ret.append(re.sub(r'[^AGTC]', 'T', read_sequence.strip()))
+
+            # ignore this
+            f.readline()
+            f.readline()
+            read_id = f.readline()
+    return ret
+
+
