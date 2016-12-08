@@ -1,6 +1,13 @@
 Christopher Nakovski
+HW4 Computational Biology
 
-1. Yes. There are more accepted read alignments in visit 6 than visit 1. This means that from the accepted alignments, there are
+1. Yes. Not only are there more accepted alignments, but there is also more variety in the misaligned nucleotides.
+   This is likely because the HIV virus has had more time to replicate its genome after the 6th visit as compared to the 1st visit,
+   meaning that a larger portion of the reads in v6 are made up of HIV dna. Because of the higher number of accepted reads,
+   there are also a higher number of nucleotide mismatches within accepted reads, explaining the larger mismatch variety.
+
+   In summary, the HIV has had more time to replicate and inject its dna into the patient's genome from v1 to v6, and
+   thus ends up composing a larger portion of the patient's genome as time goes on.
 
 2. No, there are some variants in v1 that are missing in v6:
     read positions:

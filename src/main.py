@@ -113,5 +113,3 @@ if __name__ == '__main__':
     print("Read positions in v1 and not in v6 (%d)" % len(in_v1_not_v6))
     for pos in in_v1_not_v6:
         print('\t%d' % pos)
-
-
